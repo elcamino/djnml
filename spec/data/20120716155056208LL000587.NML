@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE doc SYSTEM "djnml-1.0b.dtd">
+<doc msize="000001968" md5="88d754f61ba4361c72a6a6dd0d2d00d5" sysId="sbknwsdcmn4p1" destination="AW" distId="NHP1" transmission-date="20120716T135050Z" >    
+<djnml publisher="DJN" docdate="20120713" product="LL" seq="587" xml:lang="en-us" >
+<administration>
+<doc-delete product="LL" docdate="20110608" seq="001579" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001580" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001581" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001582" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001583" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001584" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001585" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001586" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001587" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001588" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001589" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001590" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001591" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001592" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001593" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001594" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001595" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001596" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001597" publisher="DJN" reason="expire" />
+<doc-delete product="LL" docdate="20110608" seq="001598" publisher="DJN" reason="expire" />
+</administration>
+</djnml>
+</doc>

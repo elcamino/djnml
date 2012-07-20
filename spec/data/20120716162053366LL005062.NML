@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE doc SYSTEM "djnml-1.0b.dtd">
+<doc msize="000003094" md5="5e915fb11ebcb5ebd2350349415550b0" sysId="sbknwsdcmn4p1" destination="AW" distId="NHP1" transmission-date="20120716T142053Z" >    
+<djnml publisher="DJN" docdate="20120716" product="LL" seq="5062" xml:lang="en-us" >
+<head>
+<copyright year="2012" holder="Dow Jones &amp; Company, Inc." ></copyright>
+<docdata>
+<djn>
+<djn-newswires news-source="DJLL" origin="DJ" service-id="CO" >
+<djn-press-cutout/>
+<djn-urgency>0</djn-urgency>
+<djn-mdata brand="DJ" temp-perm="P" retention="N" hot="N" original-source="DJGE" accession-number="20120716005062" page-citation="" display-date="20120716T1417Z" >      
+<djn-coding>
+<djn-company>
+<c>AREVA.FR</c>
+<c>ARVCY</c>
+<c>SI</c>
+<c>SIE.XE</c>
+</djn-company>
+<djn-isin>
+<c>DE0007236101</c>
+<c>FR0011027143</c>
+<c>US04012G1022</c>
+<c>US8261975010</c>
+</djn-isin>
+<djn-industry>
+<c>I/ELC</c>
+<c>I/IDD</c>
+<c>I/XDAX</c>
+<c>I/XDJGI</c>
+<c>I/XES</c>
+<c>I/XGDW</c>
+<c>I/XGTI</c>
+<c>I/XIGT</c>
+<c>I/XISL</c>
+<c>I/XNYA</c>
+<c>I/XSLI</c>
+<c>I/XST5</c>
+</djn-industry>
+<djn-page>
+<c>90021</c>
+<c>90025</c>
+<c>90060</c>
+<c>90077</c>
+<c>90083</c>
+<c>90084</c>
+<c>90110</c>
+<c>90111</c>
+<c>90118</c>
+</djn-page>
+<djn-subject>
+<c>N/DJGE</c>
+<c>N/LL</c>
+<c>N/ADR</c>
+<c>N/CAC</c>
+<c>N/CNW</c>
+<c>N/DBS</c>
+<c>N/DJGC</c>
+<c>N/DJGG</c>
+<c>N/DJWI</c>
+<c>N/GERM</c>
+<c>N/NENG</c>
+<c>N/WEI</c>
+</djn-subject>
+<djn-market>
+<c>M/IDU</c>
+<c>M/NND</c>
+<c>M/UTI</c>
+</djn-market>
+<djn-product>
+<c>P/EWR</c>
+<c>P/GMA</c>
+<c>P/GWEB</c>
+<c>P/NRG</c>
+<c>P/OAC</c>
+<c>P/OAGW</c>
+<c>P/OLGE</c>
+</djn-product>
+<djn-geo>
+<c>R/EC</c>
+<c>R/EU</c>
+<c>R/EZN</c>
+<c>R/FR</c>
+<c>R/GE</c>
+<c>R/NAPW</c>
+<c>R/WEU</c>
+</djn-geo>
+</djn-coding>
+</djn-mdata>
+</djn-newswires>
+</djn>
+</docdata>
+</head>
+<body>
+<headline brand-display="DJ" >
+Neuer &#196;rger f&#252;r Siemens wegen finnischem Atomkraftwerks-Bau</headline>
+<text>
+<p>
+  Die Fertigstellung des von einem Siemens-Konsortium gebauten finnischen Atomreaktors Olkiluoto 3 l&#228;sst weiter auf sich warten. Wie die Betreiberfirma Teollisuuden Voima Oyj (TVO) mitteilte, wird der Reaktor nicht wie geplant 2014 ans Netz gehen. Grund daf&#252;r sei, dass die Installationsarbeiten und die Einrichtung der Automatisierungstechnik nicht mehr im Zeitplan l&#228;gen. F&#252;r die erneuten Verz&#246;gerungen machte TVO das Konsortium aus Siemens und dem franz&#246;sischen Atomkraftspezialisten Areva verantwortlich. </p>
+<p>
+  Ein Siemens-Sprecher zeigte sich auf Anfrage erstaunt von der TVO-Meldung. Einen Kommentar gab der Sprecher des DAX-Konzerns zun&#228;chst aber nicht ab. </p>
+<p>
+  Erhebliche Versp&#228;tungen beim Bau des Reaktors haben schon wiederholt f&#252;r Streit zwischen dem Betreiber und dem Konsortium gesorgt. So hatte der finnische Versorger wegen der Probleme 100 Millionen Euro zur&#252;ckgehalten. Dem schob der Internationale Schiedsgerichtshof Anfang Juli aber einen Riegel vor und sprach Siemens und Areva die Summe von 125 Millionen Euro zu. Der Bau ist bereits um mehrere Jahre verz&#246;gert, urspr&#252;nglich sollte der Atomreaktor 2009 fertiggestellt sein. </p>
+<p>
+  Kontakt zur Autorin: ursula.quass@dowjones.com </p>
+<p>
+  DJG/uqu </p>
+<p>
+  (END) Dow Jones Newswires</p>
+<p>
+  July 16, 2012 10:17 ET (14:17 GMT)</p>
+</text>
+</body>
+</djnml>
+</doc>
