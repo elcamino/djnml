@@ -1,9 +1,21 @@
 = djnml
 
-Description goes here.
+DJNML is a ruby library that parses Dow Jones NML newsfeed files into an object
+
+== Synopsis
+
+require 'djnml'
+
+nml  = DJNML.load('20120716162053366LL005062.NML')
+lang = nml.language
+website = nml.website
+company = nml.company_name
+text = nml.text
+html = nml.html
+
 
 == Contributing to djnml
- 
+
 * Check out the latest master to make sure the feature hasn't been implemented or the bug hasn't been fixed yet.
 * Check out the issue tracker to make sure someone already hasn't requested it and/or contributed it.
 * Fork the project.

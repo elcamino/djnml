@@ -16,9 +16,9 @@ Jeweler::Tasks.new do |gem|
   # gem is a Gem::Specification... see http://docs.rubygems.org/read/chapter/20 for more options
   gem.name = "djnml"
   gem.homepage = "http://github.com/elcamino/djnml"
-  gem.license = "MIT"
+  gem.license = "BSD"
   gem.summary = %Q{A ruby library to parse Dow Jones NML newsfeed files}
-  gem.description = %Q{TODO: longer description of your gem}
+  gem.description = %Q{This ruby library parses Dow Jones NML files into a DJNML object}
   gem.email = "elcamino@spyz.org"
   gem.authors = ["Tobias Begalke"]
   # dependencies defined in Gemfile

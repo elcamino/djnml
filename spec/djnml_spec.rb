@@ -1,7 +1,274 @@
-require File.expand_path(File.dirname(__FILE__) + '/spec_helper')
+# encoding: UTF-8
 
-describe "Djnml" do
-  it "fails" do
-    fail "hey buddy, you should probably rename this file and start specing for real"
+require 'spec_helper'
+require 'djnml'
+require 'digest/sha1'
+require 'singleton'
+
+
+class LanguageDetector
+  include Singleton
+end
+
+data_base =  File.join(File.dirname(__FILE__), 'data')
+story_file_en = File.join(data_base, 'DN20080506000785.nml')
+story_file_de = File.join(data_base, '20120716162053366LL005062.NML')
+story_file_internet = File.join(data_base, '20120716161436878LL001634.NML')
+story_file_admin = File.join(data_base, '20120716155056208LL000587.NML')
+invalid_file = File.join(data_base, 'doesnt_exist.nml')
+
+
+
+describe "DJNML raises errors when loading a file that doesn't exist" do
+  it "DJNML.load('#{invalid_file}') raises an DJNML::FileError" do
+    expect { DJNML.load(invalid_file) }.to raise_error(DJNML::FileError)
   end
+
+  it "load('#{invalid_file}') raises an DJNML::FileError" do
+    expect { DJNML.new.load(invalid_file) }.to raise_error(DJNML::FileError)
+  end
+end
+
+describe "DJNML.load('#{story_file_de}') loads a Dow jones NML story and parses it." do
+  before(:all) {
+    @djnml = DJNML.load(story_file_de)
+  }
+  subject { @djnml }
+
+  it { should be }
+
+  it "Language should be 'de'" do
+    subject.language.should == 'de'
+  end
+
+  its(:copyright_year) { should == 2012 }
+  its(:copyright_holder) { should == 'Dow Jones & Company, Inc.'}
+
+  it "should have content" do
+    subject.has_content?.should == true
+  end
+
+end
+
+describe "DJNML.load('#{story_file_internet}') loads a Dow jones NML story and parses it." do
+  before(:all) {
+    @djnml = DJNML.load(story_file_internet)
+  }
+  subject { @djnml }
+
+  it { should be }
+
+  it "Language should be 'en'" do
+    subject.language.should == 'en'
+  end
+
+  its(:website) { should == 'www.vossloh.com' }
+  its(:company_name) { should == 'Vossloh AG' }
+  its(:company_address) { should == 'Vosslohstr. 4' }
+  its(:company_zip) { should == '58791'}
+  its(:company_city) { should == 'Werdohl' }
+end
+
+describe "DJNML.load('#{story_file_en}') loads a Dow Jones NML story and parses it." do
+  before(:all) {
+    @djnml = DJNML.load(story_file_en)
+  }
+  subject { @djnml }
+
+  let(:html_sha1sum) {
+    Digest::SHA1.hexdigest(subject.html)
+  }
+
+  let(:text_sha1sum) {
+    Digest::SHA1.hexdigest(subject.text)
+  }
+
+  it { should be }
+
+  # doc
+  #
+  its(:msize) { should == 11410 }
+  its(:md5) { should == '7abbf5047fee493e144efefbdf28c9f0' }
+  its(:sys_id) { should == 'dcmn2p1' }
+  its(:destination) { should == 'AW' }
+  its(:dist_id) { should == 'AMD6' }
+  its(:transmission_date) { should == Time.parse('20080506T053501Z') }
+
+  # djnml
+  #
+  its(:publisher) { should == 'DJN' }
+  its(:doc_date) { should == Time.parse('2008-05-06') }
+  its(:product) { should == 'DN' }
+  its(:seq) { should == 785 }
+  its(:lang) { should == 'en-us' }
+
+  # djn-newswires
+  #
+  its(:news_source) { should == 'DJDN' }
+  its(:origin) { should == 'DJ' }
+  its(:service_id) { should == 'CO' }
+
+  # djn-urgency
+  #
+  its(:urgency) { should == 0 }
+
+  # djn-mdata
+  #
+  its(:brand) { should == 'DJ' }
+  its(:temp_perm) { should == 'P' }
+  its(:retention) { should == 'N' }
+  its(:hot) { should == 'N' }
+  its(:original_source) { should == 'T' }
+  its(:accession_number) { should == '20080506000785' }
+  its(:page_citation) { should == '' }
+  its(:display_date) { should == Time.parse('20080506T0535Z') }
+
+  # codes / company
+  #
+  its(:company_code) { should == %w(ADDYY ADS.XE) }
+
+  # codes / isin
+  #
+  its(:isin_code) { should == %w(DE0005003404) }
+
+  # codes / page
+  #
+  its(:page_code) { should == [] }
+
+  # code / industry
+  #
+  it "industry_code should consist of these symbols: I/FOT I/TEX I/XDAX I/XDJGI I/XISL." do
+    subject.industry_code.map { |c| c.symbol }.should == %w(I/FOT I/TEX I/XDAX I/XDJGI I/XISL)
+  end
+
+  it "industry_code[0].name.should == 'Footwear'" do
+    subject.industry_code[0].name.should == 'Footwear'
+  end
+
+  # code / subject
+  #
+  it "subject_code should consist of these symbols: N/DJCB N/DJEI N/DJEP N/DJFP N/DJGP N/DJGS N/DJGV N/DJI N/DJIN N/DJIV N/DJN N/DJPT N/DJWB N/WER N/ADR N/CAC N/CNW N/DJPN N/DJWI N/ERN N/PRL N/TPCT N/WEI." do
+    subject.subject_code.map { |c| c.symbol }.should == %w(N/DJCB N/DJEI N/DJEP N/DJFP N/DJGP N/DJGS N/DJGV N/DJI N/DJIN N/DJIV N/DJN
+                                    N/DJPT N/DJWB N/WER N/ADR N/CAC N/CNW N/DJPN N/DJWI N/ERN N/PRL N/TPCT N/WEI )
+  end
+
+  it "subject_code[0].name.should == 'Dow Jones Corporate Bond Service'" do
+    subject.subject_code[0].name.should == 'Dow Jones Corporate Bond Service'
+  end
+
+  # code / market
+  #
+  it "market_code should consist of these symbols: M/MMR M/NCY M/TPX" do
+    subject.market_code.map { |c| c.symbol }.should == %w(M/MMR M/NCY M/TPX)
+  end
+
+  it "market_code[0].name.should == 'More News to Follow'" do
+    subject.market_code[0].name.should == 'More News to Follow'
+  end
+
+  # code / product
+  #
+  it "product_code should consist of these symbols: P/TAP" do
+    subject.product_code.map { |c| c.symbol }.should ==  %w(P/TAP)
+  end
+
+  it "product_code[0].name.should == 'Press Releases Auto-Published on Ticker'" do
+    subject.product_code[0].name.should == 'Press Releases Auto-Published on Ticker'
+  end
+
+  # code / geo
+  #
+  it "geo_code should consist of these symbols: R/EC R/EU R/GE R/WEU" do
+    subject.geo_code.map { |c| c.symbol }.should == %w(R/EC R/EU R/GE R/WEU)
+  end
+
+  it "geo_code[0].name.should == 'European Union'" do
+    subject.geo_code[0].name.should == 'European Union'
+  end
+
+  # body / headline
+  #
+  its(:headline) { should == 'PRESS RELEASE: adidas Group: First Quarter 2008 Results' }
+  its(:headline_brand) { should == nil }
+
+
+  # body / text as html
+  #
+  it "html checksum should be 143f70beac7ca84f3d5f320afe602603e728ee72" do
+    html_sha1sum.should == '5b2f356bb4bff2c6ccbe6ad70754952aff926235'
+  end
+
+  # body / text as plain text
+  #
+  it "text checksum should be 27a547372614d04b81c4334bb3902a8a7d980bd4" do
+    text_sha1sum.should == '27a547372614d04b81c4334bb3902a8a7d980bd4'
+  end
+
+  it "Language should be 'en'" do
+    subject.language.should == 'en'
+  end
+
+end
+
+describe "DJNML.load('#{story_file_admin}') loads an  Dow Jones admin NML file and parses it." do
+  before(:all) {
+    @djnml = DJNML.load(story_file_admin)
+  }
+  subject { @djnml }
+
+  let(:delete_0) { @djnml.delete.first }
+  let(:delete_1) { @djnml.delete.last }
+
+  it { should be }
+  its(:msize) { should == 1968 }
+  its(:md5) { should == '88d754f61ba4361c72a6a6dd0d2d00d5' }
+  its(:seq) { should == 587 }
+  its(:doc_date) { should == Time.parse('20120713') }
+
+  its(:"delete.size") { should == 20 }
+
+  it "should not have content" do
+    subject.has_content?.should == false
+  end
+
+  it "delete.first.product should == 'LL'" do
+    delete_0.product.should == 'LL'
+  end
+
+  it "delete.first.doc_date should == #{Time.parse('20110608')}" do
+    delete_0.doc_date.should == Time.parse('20110608')
+  end
+
+  it "delete.first.seq should == 1579" do
+    delete_0.seq.should == 1579
+  end
+
+  it "delete.first.publisher should == 'DJN'" do
+    delete_0.publisher.should == 'DJN'
+  end
+
+  it "delete.first.reason should == 'expire'" do
+    delete_0.reason.should == 'expire'
+  end
+
+  it "delete.last.product should == 'LL'" do
+    delete_1.product.should == 'LL'
+  end
+
+  it "delete.last.doc_date should == #{Time.parse('20110608')}" do
+    delete_1.doc_date.should == Time.parse('20110608')
+  end
+
+  it "delete.last.seq should == 1598" do
+    delete_1.seq.should == 1598
+  end
+
+  it "delete.last.publisher should == 'DJN'" do
+    delete_1.publisher.should == 'DJN'
+  end
+
+  it "delete.last.reason should == 'expire'" do
+    delete_1.reason.should == 'expire'
+  end
+
 end
