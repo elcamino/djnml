@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE doc SYSTEM "djnml-1.0b.dtd">
+<doc msize="000000631" md5="63ded81d87ca97e5513f7242764b9c5b" sysId="sbknwsdcmn4p1" destination="AW" distId="NHP1" transmission-date="20120720T202916Z" >
+<djnml publisher="DJN" docdate="20120720" product="LL" seq="7284" xml:lang="es" >
+<administration>
+<doc-modify docdate="20120720" product="LL" publisher="DJN" seq="7150" >
+<modify-replace xpath="djnml/body/headline">
+<headline prefix="*"  brand-display="DJ" >
+Gobierno Brasil rebaja proyecci&#243;n crecimiento 2012 a 3,0%</headline>
+</modify-replace>
+<modify-replace xpath="djnml/head/docdata/djn/djn-newswires/djn-press-cutout">
+<djn-press-cutout/>
+</modify-replace>
+<modify-replace xpath="djnml/head/docdata/djn/djn-newswires/djn-urgency">
+<djn-urgency>0</djn-urgency>
+</modify-replace>
+<modify-replace xpath="djnml/body/text">
+<text><p>test paragraph</p></text>
+</modify-replace>
+<modify-replace xpath="djnml/body/summary">
+<summary><p>test summary</p></summary>
+</modify-replace>
+</doc-modify>
+</administration>
+</djnml>
+</doc>

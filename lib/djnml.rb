@@ -30,6 +30,8 @@ require 'nokogiri'
 require 'date'
 require 'language_detector'
 require 'djnml/codes'
+require 'djnml/delete'
+require 'djnml/modification'
 
 class DJNML
 
@@ -40,11 +42,13 @@ class DJNML
               :brand, :temp_perm, :retention, :hot, :original_source,
               :accession_number, :display_date, :page_citation,
               :company_code, :isin_code, :industry_code, :page_code,
-              :subject_code, :market_code, :product_code, :geo_code,
+              :government_code, :stat_code, :journal_code, :routing_code,
+              :content_code, :function_code, :subject_code, :market_code,
+              :product_code, :geo_code,
               :headline, :headline_brand, :text, :html, :language,
               :copyright_year, :copyright_holder,
               :website, :company_name, :company_address, :company_zip, :company_city,
-              :delete
+              :delete, :modifications
 
 
   def self.load(filename)
@@ -192,6 +196,18 @@ class DJNML
 
     industry = nil
 
+    # coding / government
+    #
+    begin
+      government       = parser.search('/doc/djnml/head/docdata/djn/djn-newswires/djn-mdata/djn-coding/djn-government/c')
+      @government_code = government.map { |tag| Codes.new(tag.text.strip) }
+    rescue
+      # ignore errors
+    end
+
+    government = nil
+
+
     # coding / subject
     #
     begin
@@ -235,6 +251,64 @@ class DJNML
     end
 
     geo = nil
+
+    # coding / stat
+    #
+    begin
+      stat = parser.search('/doc/djnml/head/docdata/djn/djn-newswires/djn-mdata/djn-coding/djn-stat/c')
+      @stat_code = stat.map { |tag| Codes.new(tag.text.strip) }
+    rescue
+      # ignore errors
+    end
+
+    stat = nil
+
+
+    # coding / journal
+    #
+    begin
+      journal = parser.search('/doc/djnml/head/docdata/djn/djn-newswires/djn-mdata/djn-coding/djn-journal/c')
+      @journal_code = journal.map { |tag| Codes.new(tag.text.strip) }
+    rescue
+      # ignore errors
+    end
+
+    journal = nil
+
+
+    # coding / routing
+    #
+    begin
+      routing = parser.search('/doc/djnml/head/docdata/djn/djn-newswires/djn-mdata/djn-coding/djn-routing/c')
+      @routing_code = routing.map { |tag| Codes.new(tag.text.strip) }
+    rescue
+      # ignore errors
+    end
+
+    routing = nil
+
+    # coding / content
+    #
+    begin
+      content = parser.search('/doc/djnml/head/docdata/djn/djn-newswires/djn-mdata/djn-coding/djn-content/c')
+      @content_code = content.map { |tag| Codes.new(tag.text.strip) }
+    rescue
+      # ignore errors
+    end
+
+    content = nil
+
+    # coding / function
+    #
+    begin
+      function = parser.search('/doc/djnml/head/docdata/djn/djn-newswires/djn-mdata/djn-coding/djn-function/c')
+      @function_code = function.map { |tag| Codes.new(tag.text.strip) }
+    rescue
+      # ignore errors
+    end
+
+    function = nil
+
 
     # body / headline
     #
@@ -313,23 +387,30 @@ class DJNML
       # ignore errors
     end
 
+    # replacements
+    #
+    @modifications = []
+#    begin
+      doc_modify = parser.search('/doc/djnml/administration/doc-modify').first
+
+      mods = parser.search('/doc/djnml/administration/doc-modify/modify-replace')
+      mods.each do |m|
+        @modifications << Modification.new(:doc_date => doc_modify['docdate'],
+                                           :product => doc_modify['product'],
+                                           :publisher => doc_modify['publisher'],
+                                           :seq => doc_modify['seq'],
+                                           :xml => m)
+      end
+#    rescue Exception => e
+#      puts e.to_s
+ #     puts e.backtrace
+ #   end
+
     self
   end
 
   def has_content?
     ! self.text.nil?
-  end
-
-  class Delete
-    attr_reader :product, :doc_date, :seq, :publisher, :reason
-
-    def initialize(args = {})
-      @product = args[:product] if args[:product]
-      @doc_date = Time.parse(args[:doc_date]) if args[:doc_date]
-      @seq = args[:seq].to_i if args[:seq]
-      @publisher = args[:publisher] if args[:publisher]
-      @reason = args[:reason] if args[:reason]
-    end
   end
 
   class FileError < Exception

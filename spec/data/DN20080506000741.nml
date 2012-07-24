@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE doc SYSTEM "djnml-1.0b.dtd">
+<doc msize="000001276" md5="eca520e42c299d307ce5b7aade6d38e2" sysId="dcmn2p1" destination="AW" distId="AMD6" transmission-date="20080506T071352Z" >    
+<djnml publisher="DJN" docdate="20080506" product="DN" seq="2011" xml:lang="en-us" >
+<administration>
+<doc-modify docdate="20080506" product="DN" publisher="DJN" seq="741" >
+<modify-replace xpath="djnml/head/docdata/djn/djn-newswires/djn-mdata">
+<djn-mdata brand="DJ" temp-perm="P" retention="N" hot="N" original-source="FW" accession-number="20080506000741" page-citation="" display-date="20080506T0529Z" >      
+<djn-coding>
+<djn-company>
+<c>ADEN.VX</c>
+</djn-company>
+<djn-isin>
+<c>CH0012138605</c>
+</djn-isin>
+<djn-industry>
+<c>I/EAG</c>
+<c>I/SVC</c>
+<c>I/XDJGI</c>
+<c>I/XSMI</c>
+</djn-industry>
+<djn-subject>
+<c>N/CMDI</c>
+<c>N/CMR</c>
+<c>N/DJCB</c>
+<c>N/DJEI</c>
+<c>N/DJEP</c>
+<c>N/DJGP</c>
+<c>N/DJGV</c>
+<c>N/DJI</c>
+<c>N/DJIN</c>
+<c>N/DJIV</c>
+<c>N/DJMO</c>
+<c>N/DJN</c>
+<c>N/DJPT</c>
+<c>N/DJWB</c>
+<c>N/ECR</c>
+<c>N/EUCM</c>
+<c>N/EWR</c>
+<c>N/WER</c>
+<c>N/BNEU</c>
+<c>N/CAC</c>
+<c>N/CNW</c>
+<c>N/DJPN</c>
+<c>N/DJS</c>
+<c>N/DJSS</c>
+<c>N/DJWI</c>
+<c>N/ERN</c>
+<c>N/FCTV</c>
+<c>N/TNW</c>
+<c>N/TSY</c>
+<c>N/WEI</c>
+</djn-subject>
+<djn-market>
+<c>M/IDU</c>
+<c>M/NND</c>
+</djn-market>
+<djn-product>
+<c>P/RTRS</c>
+</djn-product>
+<djn-geo>
+<c>R/EU</c>
+<c>R/SZ</c>
+<c>R/WEU</c>
+</djn-geo>
+</djn-coding>
+</djn-mdata>
+</modify-replace>
+</doc-modify>
+</administration>
+</djnml>
+</doc>

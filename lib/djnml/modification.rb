@@ -1,0 +1,190 @@
+# Copyright (c) 2012, Tobias Begalke
+# All rights reserved.
+#
+# Redistribution and use in source and binary forms, with or without
+# modification, are permitted provided that the following conditions are met:
+#     * Redistributions of source code must retain the above copyright
+#       notice, this list of conditions and the following disclaimer.
+#     * Redistributions in binary form must reproduce the above copyright
+#       notice, this list of conditions and the following disclaimer in the
+#       documentation and/or other materials provided with the distribution.
+#     * Neither the name of the <organization> nor the
+#       names of its contributors may be used to endorse or promote products
+#       derived from this software without specific prior written permission.
+
+# THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS" AND
+# ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE IMPLIED
+# WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+# DISCLAIMED. IN NO EVENT SHALL <COPYRIGHT HOLDER> BE LIABLE FOR ANY
+# DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES
+# (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+# LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER CAUSED AND
+# ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY, OR TORT
+# (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE OF THIS
+# SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+
+
+class DJNML
+  class Modification
+    attr_reader :publisher, :doc_date, :product, :seq, :xpath, :mdata,
+                :headline, :text, :urgency, :press_cutout, :summary
+
+    def initialize(args = {})
+      @publisher = args[:publisher]
+      @doc_date  = Time.parse(args[:doc_date])
+      @product   = args[:product]
+      @seq       = args[:seq].to_i
+      @xml       = args[:xml]
+      @xpath     = @xml['xpath']
+
+      if mdata = @xml.search('djn-mdata').to_a.first
+        @mdata = Mdata.new(mdata)
+      end
+
+      if headline = @xml.search('headline').to_a.first
+        @headline = headline.text.strip
+      end
+
+      if text = @xml.search('text').to_a.first
+        @text = XMLText.new(text)
+      end
+
+      if text = @xml.search('summary').to_a.first
+        @summary = XMLText.new(text)
+      end
+
+      if press = @xml.search('djn-press-cutout').to_a.first
+        @press_cutout = press.text.strip
+      end
+
+      if urgency = @xml.search('djn-urgency').to_a.first
+        @urgency = urgency.text.strip
+      end
+    end
+
+
+    class XMLText
+      attr_reader :text, :html
+
+      def initialize(text)
+        @text = text.children.text.strip
+        @html = text.children.to_xml
+      end
+
+      def to_s
+        @text.to_s
+      end
+
+    end
+
+    class Mdata
+      attr_reader :company_code, :isin_code, :industry_code, :government_code,
+                  :page_code, :subject_code, :market_code, :product_code,
+                  :geo_code, :stat_code, :journal_code, :routing_code,
+                  :content_code, :function_code
+
+      def initialize(xml_node)
+        @xml = xml_node
+
+        # company
+        #
+        if tag = @xml.search('djn-coding/djn-company/c')
+          @company_code = tag.map { |tag| tag.text.strip }
+          tag = nil
+        end
+
+        # isin
+        #
+        if tag = @xml.search('djn-coding/djn-isin/c')
+          @isin_code = tag.map { |tag| tag.text.strip }
+          tag = nil
+        end
+
+        # industry
+        #
+        if tag = @xml.search('djn-coding/djn-industry/c')
+          @industry_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # government
+        #
+        if tag = @xml.search('djn-coding/djn-government/c')
+          @government_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # page
+        #
+        if tag = @xml.search('djn-coding/djn-page/c')
+          @page_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # subject
+        #
+        if tag = @xml.search('djn-coding/djn-subject/c')
+          @subject_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # market
+        #
+        if tag = @xml.search('djn-coding/djn-market/c')
+          @market_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # product
+        #
+        if tag = @xml.search('djn-coding/djn-product/c')
+          @product_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # geo
+        #
+        if tag = @xml.search('djn-coding/djn-geo/c')
+          @geo_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # stat
+        #
+        if tag = @xml.search('djn-coding/djn-stat/c')
+          @stat_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # journal
+        #
+        if tag = @xml.search('djn-coding/djn-journal/c')
+          @journal_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # routing
+        #
+        if tag = @xml.search('djn-coding/djn-routing/c')
+          @routing_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # content
+        #
+        if tag = @xml.search('djn-coding/djn-content/c')
+          @content_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+        # function
+        #
+        if tag = @xml.search('djn-coding/djn-function/c')
+          @function_code = tag.map { |tag| ::DJNML::Codes.new(tag.text.strip) }
+          tag = nil
+        end
+
+      end
+    end
+  end
+end

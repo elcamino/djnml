@@ -14,7 +14,10 @@ data_base =  File.join(File.dirname(__FILE__), 'data')
 story_file_en = File.join(data_base, 'DN20080506000785.nml')
 story_file_de = File.join(data_base, '20120716162053366LL005062.NML')
 story_file_internet = File.join(data_base, '20120716161436878LL001634.NML')
+story_file_govt = File.join(data_base, 'DN20080506000839.nml')
 story_file_admin = File.join(data_base, '20120716155056208LL000587.NML')
+story_file_modify_replace_meta = File.join(data_base, 'DN20080506000741.nml')
+story_file_modify_replace_headline = File.join(data_base, '20120720222918942LL007284.NML')
 invalid_file = File.join(data_base, 'doesnt_exist.nml')
 
 
@@ -29,6 +32,202 @@ describe "DJNML raises errors when loading a file that doesn't exist" do
   end
 end
 
+describe "DJNML.load('#{story_file_modify_replace_headline}') loads a Dow jones NML administration modify-replace story and parses it." do
+  before(:all) {
+    @djnml = DJNML.load(story_file_modify_replace_headline)
+  }
+  subject { @djnml }
+
+  let(:mod_0) { @djnml.modifications[0] }
+  let(:mod_1) { @djnml.modifications[1] }
+  let(:mod_2) { @djnml.modifications[2] }
+  let(:mod_3) { @djnml.modifications[3] }
+  let(:mod_4) { @djnml.modifications[4] }
+  let(:headline) { mod_0.headline }
+  let(:press_cutout) { mod_1.press_cutout }
+  let(:urgency) { mod_2.urgency }
+  let(:summary) { mod_4.summary }
+  let(:text) { mod_3.text }
+
+  it { should be }
+  its(:'modifications.size') { should == 5 }
+
+  it "subject.modifications.each.doc_date.should == #{Time.parse('20120720')}" do
+    mod_0.doc_date.should == Time.parse('20120720')
+    mod_1.doc_date.should == Time.parse('20120720')
+    mod_2.doc_date.should == Time.parse('20120720')
+  end
+
+  it "subject.modifications.each.product.should == 'LL'" do
+    mod_0.product.should == 'LL'
+    mod_1.product.should == 'LL'
+    mod_2.product.should == 'LL'
+  end
+
+  it "subject.modifications.each.publisher.should == 'DJN'" do
+    mod_0.publisher.should == 'DJN'
+    mod_1.publisher.should == 'DJN'
+    mod_2.publisher.should == 'DJN'
+  end
+
+  it "subject.modifications.each.seq.should == 7150" do
+    mod_0.seq.should == 7150
+    mod_1.seq.should == 7150
+    mod_2.seq.should == 7150
+  end
+
+  it "subject.modifications[0].headline.class.should == String" do
+    headline.class.should == String
+  end
+
+  it "subject.modifications[0].headline.should == 'Gobierno Brasil rebaja proyección crecimiento 2012 a 3,0%'" do
+    headline.should == 'Gobierno Brasil rebaja proyección crecimiento 2012 a 3,0%'
+  end
+
+  it "subject.modifications[2].urgency.class.should == String" do
+    urgency.class.should == String
+  end
+
+  it "subject.modifications[2].urgency.should == '0'" do
+    urgency.should == '0'
+  end
+
+  it "subject.modifications[1].press_cutout.class.should == String" do
+    press_cutout.class.should == String
+  end
+
+  it "subject.modifications[1].press_cutout.should == ''" do
+    press_cutout.should == ''
+  end
+
+  it "subject.modifications[4].xpath.should == ''" do
+    mod_4.xpath.should == 'djnml/body/summary'
+  end
+
+  it "subject.modifications[4].summary.text.should == 'test summary'" do
+    summary.text.should == 'test summary'
+  end
+
+  it "subject.modifications[4].summary.html.should == '<p>test summary</p>'" do
+    summary.html.should == '<p>test summary</p>'
+  end
+
+  it "subject.modifications[3].xpath.should == ''" do
+    mod_3.xpath.should == 'djnml/body/text'
+  end
+
+  it "subject.modifications[3].text.should == 'test paragraph'" do
+    text.text.should == 'test paragraph'
+  end
+
+  it "subject.modifications[3].html.should == '<p>test paragraph</p>'" do
+    text.html.should == '<p>test paragraph</p>'
+  end
+
+end
+
+__END__
+
+describe "DJNML.load('#{story_file_modify_replace_meta}') loads a Dow jones NML administration modify-replace story and parses it." do
+  before(:all) {
+    @djnml = DJNML.load(story_file_modify_replace_meta)
+  }
+  subject { @djnml }
+
+  let(:mod) { @djnml.modifications[0] }
+  let(:mdata) { mod.mdata }
+
+  it { should be }
+
+  its(:'modifications.size') { should == 1 }
+
+  it "subject.modifications[0].xpath.should == 'djnml/head/docdata/djn/djn-newswires/djn-mdata'" do
+    mod.xpath.should == 'djnml/head/docdata/djn/djn-newswires/djn-mdata'
+  end
+
+  it "subject.modifications[0].doc_date.should == #{Time.parse('20080506')}" do
+    mod.doc_date.should == Time.parse('20080506')
+  end
+
+  it "subject.modifications[0].product.should == 'DN'" do
+    mod.product.should == 'DN'
+  end
+
+  it "subject.modifications[0].publisher.should == 'DJN'" do
+    mod.publisher.should == 'DJN'
+  end
+
+  it "subject.modifications[0].seq.should == 741" do
+    mod.seq.should == 741
+  end
+
+  it "subject.modifications[0].mdata.should be" do
+    mdata.class.should be
+  end
+
+  it "subject.modifications[0].mdata.class should == ::DJNML::Modification::Mdata" do
+    mdata.class.should == ::DJNML::Modification::Mdata
+  end
+
+  it "subject.modifications[0].mdata.company_code.should == %w(ADEN.VX)" do
+    mdata.company_code.should == %w(ADEN.VX)
+  end
+
+  it "subject.modifications[0].mdata.isin_code.should == %w(CH0012138605)" do
+    mdata.isin_code.should == %w(CH0012138605)
+  end
+
+  it "subject.modifications[0].mdata.industry_code.should == %w(I/EAG I/SVC I/XDJGI I/XSMI)" do
+    mdata.industry_code.map { |c| c.symbol }.should == %w(I/EAG I/SVC I/XDJGI I/XSMI)
+  end
+
+  it "subject.modifications[0].mdata.subject_code.should == %w(N/CMDI N/CMR N/DJCB N/DJEI N/DJEP N/DJGP N/DJGV N/DJI N/DJIN N/DJIV N/DJMO N/DJN N/DJPT N/DJWB N/ECR N/EUCM N/EWR N/WER N/BNEU N/CAC N/CNW N/DJPN N/DJS N/DJSS N/DJWI N/ERN N/FCTV N/TNW N/TSY N/WEI)" do
+    mdata.subject_code.map { |c| c.symbol }.should == %w(N/CMDI N/CMR N/DJCB N/DJEI N/DJEP N/DJGP N/DJGV N/DJI N/DJIN N/DJIV N/DJMO N/DJN N/DJPT N/DJWB N/ECR N/EUCM N/EWR N/WER N/BNEU N/CAC N/CNW N/DJPN N/DJS N/DJSS N/DJWI N/ERN N/FCTV N/TNW N/TSY N/WEI)
+  end
+
+  it "subject.modifications[0].mdata.market_code.should == %w(M/IDU M/NND)" do
+    mdata.market_code.map { |c| c.symbol }.should == %w(M/IDU M/NND)
+  end
+
+  it "subject.modifications[0].mdata.product_code.should == %w(P/RTRS)" do
+    mdata.product_code.map { |c| c.symbol }.should == %w(P/RTRS)
+  end
+
+  it "subject.modifications[0].mdata.geo_code.should == %w(R/EU R/SZ R/WEU)" do
+    mdata.geo_code.map { |c| c.symbol }.should == %w(R/EU R/SZ R/WEU)
+  end
+
+  it "subject.modifications[0].mdata.government_code.should == []" do
+    mdata.government_code.should == []
+  end
+
+  it "subject.modifications[0].mdata.page_code.should == []" do
+    mdata.page_code.should == []
+  end
+
+  it "subject.modifications[0].mdata.stat_code.should == []" do
+    mdata.stat_code.should == []
+  end
+
+  it "subject.modifications[0].mdata.journal_code.should == []" do
+    mdata.journal_code.should == []
+  end
+
+  it "subject.modifications[0].mdata.routing_code.should == []" do
+    mdata.routing_code.should == []
+  end
+
+  it "subject.modifications[0].mdata.content_code.should == []" do
+    mdata.content_code.should == []
+  end
+
+  it "subject.modifications[0].mdata.function_code.should == []" do
+    mdata.function_code.should == []
+  end
+end
+
+
+__END__
 describe "DJNML.load('#{story_file_de}') loads a Dow jones NML story and parses it." do
   before(:all) {
     @djnml = DJNML.load(story_file_de)
@@ -185,6 +384,14 @@ describe "DJNML.load('#{story_file_en}') loads a Dow Jones NML story and parses 
   it "geo_code[0].name.should == 'European Union'" do
     subject.geo_code[0].name.should == 'European Union'
   end
+
+  # empty codes
+  #
+  its(:stat_code) { should == [] }
+  its(:journal_code) { should == [] }
+  its(:routing_code) { should == [] }
+  its(:content_code) { should == [] }
+  its(:function_code) { should == [] }
 
   # body / headline
   #

@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE doc SYSTEM "djnml-1.0b.dtd">
+<doc msize="000001064" md5="d1c6f61c7aab6967ba642ac84e26c98d" sysId="dcmn2p1" destination="AW" distId="AMD6" transmission-date="20080506T062500Z" >    
+<djnml publisher="DJN" docdate="20080506" product="DN" seq="1436" xml:lang="en-us" >
+<administration>
+<doc-modify docdate="20080506" product="DN" publisher="DJN" seq="839" >
+<modify-replace xpath="djnml/head/docdata/djn/djn-newswires/djn-mdata">
+<djn-mdata brand="DJ" temp-perm="P" retention="N" hot="N" original-source="FW" accession-number="20080506000839" page-citation="" display-date="20080506T0542Z" >      
+<djn-coding>
+<djn-government>
+<c>G/IGV</c>
+</djn-government>
+<djn-subject>
+<c>N/AER</c>
+<c>N/BKG</c>
+<c>N/CMDI</c>
+<c>N/CMR</c>
+<c>N/DJAE</c>
+<c>N/DJGS</c>
+<c>N/DJI</c>
+<c>N/DJIV</c>
+<c>N/DJMO</c>
+<c>N/DJMS</c>
+<c>N/EMR</c>
+<c>N/EWR</c>
+<c>N/FXW</c>
+<c>N/WED</c>
+<c>N/WER</c>
+<c>N/BON</c>
+<c>N/DJWI</c>
+<c>N/EMT</c>
+<c>N/FCTV</c>
+<c>N/SDT</c>
+<c>N/TNW</c>
+</djn-subject>
+<djn-market>
+<c>M/MMR</c>
+</djn-market>
+<djn-product>
+<c>P/AEQ</c>
+<c>P/HDL</c>
+<c>P/RTRS</c>
+</djn-product>
+<djn-geo>
+<c>R/ASI</c>
+<c>R/FE</c>
+<c>R/FEO</c>
+<c>R/IO</c>
+<c>R/SSA</c>
+</djn-geo>
+</djn-coding>
+</djn-mdata>
+</modify-replace>
+</doc-modify>
+</administration>
+</djnml>
+</doc>
