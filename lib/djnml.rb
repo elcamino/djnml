@@ -402,9 +402,8 @@ class DJNML
                                            :xml => m)
       end
 #    rescue Exception => e
-#      puts e.to_s
- #     puts e.backtrace
- #   end
+      # ignore errors
+#    end
 
     self
   end

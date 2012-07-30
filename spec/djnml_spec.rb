@@ -126,8 +126,6 @@ describe "DJNML.load('#{story_file_modify_replace_headline}') loads a Dow jones 
 
 end
 
-__END__
-
 describe "DJNML.load('#{story_file_modify_replace_meta}') loads a Dow jones NML administration modify-replace story and parses it." do
   before(:all) {
     @djnml = DJNML.load(story_file_modify_replace_meta)
@@ -226,8 +224,6 @@ describe "DJNML.load('#{story_file_modify_replace_meta}') loads a Dow jones NML 
   end
 end
 
-
-__END__
 describe "DJNML.load('#{story_file_de}') loads a Dow jones NML story and parses it." do
   before(:all) {
     @djnml = DJNML.load(story_file_de)
