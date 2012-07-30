@@ -5,12 +5,12 @@
 
 Gem::Specification.new do |s|
   s.name = %q{djnml}
-  s.version = "0.0.0"
+  s.version = "1.0.2"
 
   s.required_rubygems_version = Gem::Requirement.new(">= 0") if s.respond_to? :required_rubygems_version=
   s.authors = ["Tobias Begalke"]
-  s.date = %q{2012-07-20}
-  s.description = %q{TODO: longer description of your gem}
+  s.date = %q{2012-07-30}
+  s.description = %q{This ruby library parses Dow Jones NML files into a DJNML object}
   s.email = %q{elcamino@spyz.org}
   s.extra_rdoc_files = [
     "LICENSE.txt",
@@ -24,12 +24,24 @@ Gem::Specification.new do |s|
     "README.rdoc",
     "Rakefile",
     "VERSION",
+    "djnml.gemspec",
     "lib/djnml.rb",
+    "lib/djnml/codes.rb",
+    "lib/djnml/delete.rb",
+    "lib/djnml/modification.rb",
+    "spec/data/20120716155056208LL000587.NML",
+    "spec/data/20120716161436878LL001634.NML",
+    "spec/data/20120716162053366LL005062.NML",
+    "spec/data/20120720222918942LL007284.NML",
+    "spec/data/DN20080506000741.nml",
+    "spec/data/DN20080506000785.nml",
+    "spec/data/DN20080506000839.nml",
+    "spec/djnml_codes_spec.rb",
     "spec/djnml_spec.rb",
     "spec/spec_helper.rb"
   ]
   s.homepage = %q{http://github.com/elcamino/djnml}
-  s.licenses = ["MIT"]
+  s.licenses = ["BSD"]
   s.require_paths = ["lib"]
   s.rubygems_version = %q{1.6.2}
   s.summary = %q{A ruby library to parse Dow Jones NML newsfeed files}
@@ -38,12 +50,16 @@ Gem::Specification.new do |s|
     s.specification_version = 3
 
     if Gem::Version.new(Gem::VERSION) >= Gem::Version.new('1.2.0') then
+      s.add_runtime_dependency(%q<nokogiri>, [">= 0"])
+      s.add_runtime_dependency(%q<language_detector>, [">= 0"])
       s.add_development_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_development_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_development_dependency(%q<bundler>, ["> 1.0.0"])
       s.add_development_dependency(%q<jeweler>, ["~> 1.8.4"])
       s.add_development_dependency(%q<simplecov>, [">= 0"])
     else
+      s.add_dependency(%q<nokogiri>, [">= 0"])
+      s.add_dependency(%q<language_detector>, [">= 0"])
       s.add_dependency(%q<rspec>, ["~> 2.8.0"])
       s.add_dependency(%q<rdoc>, ["~> 3.12"])
       s.add_dependency(%q<bundler>, ["> 1.0.0"])
@@ -51,6 +67,8 @@ Gem::Specification.new do |s|
       s.add_dependency(%q<simplecov>, [">= 0"])
     end
   else
+    s.add_dependency(%q<nokogiri>, [">= 0"])
+    s.add_dependency(%q<language_detector>, [">= 0"])
     s.add_dependency(%q<rspec>, ["~> 2.8.0"])
     s.add_dependency(%q<rdoc>, ["~> 3.12"])
     s.add_dependency(%q<bundler>, ["> 1.0.0"])
