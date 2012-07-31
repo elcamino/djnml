@@ -51,6 +51,59 @@ class DJNML
               :delete, :modifications
 
 
+  def self.new(data = {})
+    @msize = data['msize'].to_i
+    @md5   = data['md5']
+    @sys_id = data['sys_id']
+    @destination = data['destination']
+    @dist_id = data['dist_id']
+    @transmission_date = Time.parse(data['transmission_date'])
+    @publisher = data['publisher']
+    @doc_date  = Time.parse(djnml['doc_date'])
+    @product   = data['product']
+    @seq       = data['seq'].to_i
+    @lang      = data['lang']
+    @news_source = data['news_source']
+    @origin      = data['origin']
+    @service_id  = data['service_id']
+    @urgency     = data['urgency']
+    @brand            = data['brand']
+    @temp_perm        = data['temp_perm']
+    @retention        = data['retention']
+    @hot              = data['hot']
+    @original_source  = data['original_source']
+    @accession_number = data['accession_number']
+    @page_citation    = data['page_citation']
+    @display_date     = Time.parse(data['display_date'])
+    @company_code     = data['company_code']
+    @isin_code        = data['isin_code']
+    @page_code        = data['page_code']
+    @industry_code   = data['industry_code'].map { |c| Codes.new(c) }
+    @government_code = data['government_code'].map { |c| Codes.new(c) }
+    @subject_code    = data['subject_code'].map { |c| Codes.new(c) }
+    @market_code     = data['market_code'].map { |c| Codes.new(c) }
+    @product_code    = data['product_code'].map { |c| Codes.new(c) }
+    @geo_code        = data['geo_code'].map { |c| Codes.new(c) }
+    @stat_code       = data['stat_code'].map { |c| Codes.new(c) }
+    @journal_code    = data['stat_code'].map { |c| Codes.new(c) }
+    @routing_code    = data['routing_code'].map { |c| Codes.new(c) }
+    @content_code    = data['content_code'].map { |c| Codes.new(c) }
+    @function_code   = data['function_code'].map { |c| Codes.new(c) }
+    @headline        = data['headline']
+    @headline_brand  = data['headline_brand']
+    @html            = data['html']
+    @text            = data['text']
+    @copyright_year  = data['copyright_year']
+    @copyright_holder = data['copyright_holder']
+    @website = data['website']
+    @company_name = data['company_name']
+    @company_address=  data['company_address']
+    @company_zip = data['company_zip']
+    @company_city = data['company_city']
+    @language = data['language']
+
+  end
+
   def self.load(filename)
 
     if filename
@@ -390,7 +443,6 @@ class DJNML
     # replacements
     #
     @modifications = []
-#    begin
       doc_modify = parser.search('/doc/djnml/administration/doc-modify').first
 
       mods = parser.search('/doc/djnml/administration/doc-modify/modify-replace')
@@ -401,10 +453,6 @@ class DJNML
                                            :seq => doc_modify['seq'],
                                            :xml => m)
       end
-#    rescue Exception => e
-      # ignore errors
-#    end
-
     self
   end
 
