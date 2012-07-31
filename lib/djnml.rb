@@ -51,7 +51,9 @@ class DJNML
               :delete, :modifications
 
 
-  def self.new(data = {})
+  def initialize(data = {})
+    pp data
+
     @msize = data['msize'].to_i
     @md5   = data['md5']
     @sys_id = data['sys_id']
@@ -59,7 +61,7 @@ class DJNML
     @dist_id = data['dist_id']
     @transmission_date = Time.parse(data['transmission_date'])
     @publisher = data['publisher']
-    @doc_date  = Time.parse(djnml['doc_date'])
+    @doc_date  = Time.parse(data['doc_date'])
     @product   = data['product']
     @seq       = data['seq'].to_i
     @lang      = data['lang']
@@ -78,17 +80,17 @@ class DJNML
     @company_code     = data['company_code']
     @isin_code        = data['isin_code']
     @page_code        = data['page_code']
-    @industry_code   = data['industry_code'].map { |c| Codes.new(c) }
-    @government_code = data['government_code'].map { |c| Codes.new(c) }
-    @subject_code    = data['subject_code'].map { |c| Codes.new(c) }
-    @market_code     = data['market_code'].map { |c| Codes.new(c) }
-    @product_code    = data['product_code'].map { |c| Codes.new(c) }
-    @geo_code        = data['geo_code'].map { |c| Codes.new(c) }
-    @stat_code       = data['stat_code'].map { |c| Codes.new(c) }
-    @journal_code    = data['stat_code'].map { |c| Codes.new(c) }
-    @routing_code    = data['routing_code'].map { |c| Codes.new(c) }
-    @content_code    = data['content_code'].map { |c| Codes.new(c) }
-    @function_code   = data['function_code'].map { |c| Codes.new(c) }
+    @industry_code   = data['industry_code'].to_a.map { |c| Codes.new(c) }
+    @government_code = data['government_code'].to_a.map { |c| Codes.new(c) }
+    @subject_code    = data['subject_code'].to_a.map { |c| Codes.new(c) }
+    @market_code     = data['market_code'].to_a.map { |c| Codes.new(c) }
+    @product_code    = data['product_code'].to_a.map { |c| Codes.new(c) }
+    @geo_code        = data['geo_code'].to_a.map { |c| Codes.new(c) }
+    @stat_code       = data['stat_code'].to_a.map { |c| Codes.new(c) }
+    @journal_code    = data['stat_code'].to_a.map { |c| Codes.new(c) }
+    @routing_code    = data['routing_code'].to_a.map { |c| Codes.new(c) }
+    @content_code    = data['content_code'].to_a.map { |c| Codes.new(c) }
+    @function_code   = data['function_code'].to_a.map { |c| Codes.new(c) }
     @headline        = data['headline']
     @headline_brand  = data['headline_brand']
     @html            = data['html']
