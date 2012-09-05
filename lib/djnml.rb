@@ -52,8 +52,6 @@ class DJNML
 
 
   def initialize(data = {})
-    pp data
-
     @msize = data['msize'].to_i
     @md5   = data['md5']
     @sys_id = data['sys_id']
@@ -103,7 +101,6 @@ class DJNML
     @company_zip = data['company_zip']
     @company_city = data['company_city']
     @language = data['language']
-
   end
 
   def self.load(filename)
@@ -154,7 +151,7 @@ class DJNML
       # ignore errors
     end
 
-    djnml      = nil
+    djnml = nil
 
     # djn-newswires tag
     #
